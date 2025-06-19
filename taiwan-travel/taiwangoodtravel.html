@@ -258,7 +258,7 @@
             text-align: center;
         }
 
-        @media (max-width:1024px) {
+        @media screen and (max-width:1024px) {
 
             html,
             body {
@@ -315,7 +315,7 @@
             }
         }
 
-        @media (max-width:768px) {
+        @media screen and (max-width:768px) {
             html body{
                 font-size: 0.8rem;
             }
@@ -366,7 +366,7 @@
 
 <body>
     <!-- 第一部分：影片 -->
-    <section id="video-section">
+    <section id="video-section" muted autoplay playsinline>
         <video id="intro-video" src="begin.mp4" muted playsinline></video>
     </section>
 
@@ -876,7 +876,12 @@
 
 
         window.addEventListener("load", () => {
-            video.play();
+            video.play().catch(err => {
+                console.warn("影片播放失敗，解除限制");
+                document.body.style.overflow = "";
+                nextSection.classList.remove("hidden");
+                document.querySelector(".fixed-bar").classList.remove("hidden");
+            });;
         });
 
         video.addEventListener("play", () => {
@@ -916,7 +921,10 @@
     </script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({  
+            once: true,
+            offset: 0,
+        });
     </script>
 
 </body>
