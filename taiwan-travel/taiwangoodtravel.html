@@ -927,6 +927,9 @@
           duration: 400,        // 動畫時間不要太久
           easing: 'ease-in-out'
         });
+        if (window.innerWidth > 768) {
+            AOS.init({...});
+        }
     </script>
 
 </body>
